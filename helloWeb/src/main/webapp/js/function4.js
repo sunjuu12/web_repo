@@ -33,10 +33,13 @@ document.getElementById('saveBtn').onclick = function(e) {
 	
 	const member = new Member(name, age, height);
 	str = makeTr(member);
-	document.getElementById('list').innerHTML += str;
-		if (member.name == null) {
+	
+	if (!name || !age || !height) {
 			alert("값을 입력하세요.");
-		}	
+			return; // 함수 종료
+	}	
+	
+	document.getElementById('list').innerHTML += str;	
 	
 		//입력 초기화
 	document.getElementById('name').value = "";	
