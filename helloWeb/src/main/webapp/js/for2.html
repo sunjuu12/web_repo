@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>js/for2.html</title>
+</head>
+<body>
+    <script>
+        // jsp에서는 {}가 객체
+        const studentAry = [
+            {sno : 1, sname: '홍길동', score: 80},
+            {sno : 2, sname: '김길동', score: 88},
+            {sno : 3, sname: '박길동', score: 92}
+        ]
+        let sum = avg = 0;
+        studentAry.forEach(function(item, idx, ary) {
+            // console.log(item);
+            // 이름만 출력
+            console.log(`이름: ${item.sname}`);
+            sum += item.score;
+            if (idx == ary.length -1) {
+                avg = sum / studentAry.length;
+                // 소수자리표현
+                avg = avg.toFixed(2);
+            }
+        })
+        console.log(`점수 합계  ${sum}점이고 , 평균 ${avg}점입니다.`);
+    </script>
+</body>
+</html>
