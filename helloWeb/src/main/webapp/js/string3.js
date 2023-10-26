@@ -17,8 +17,8 @@ console.log(today.toLocaleDateString()); // yyyy.m.d
 function dateFormat(today) {
 	// yyyy-MM-dd hh24:mm:ss
 	// slice 이용해서 010 10월 달이 이렇게 되는 것을 고쳐보기용 
-	return today.getFullYear() + "-" + "0" + (today.getMonth() + 1)
-		+ "-" + "0" + today.getDate() + " " + today.getHours() 
+	return today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2)
+		+ "-" + ("0" + today.getDate()).slice(-2) + " " + today.getHours() 
 		+ ":" + today.getMinutes() + ':' + today.getSeconds();
 }
 dateFormat(today);
