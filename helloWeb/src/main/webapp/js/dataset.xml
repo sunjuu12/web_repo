@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <record>
+     <id>1</id>
+     <first_name>Suzette</first_name>
+     <email>sbeckensall0@oakley.com</email>
+  </record>
+  <record>
+     <id>2</id>
+     <first_name>Harlie</first_name>
+     <email>hmcnish1@youtube.com</email>
+  </record>
+  <record>
+     <id>3</id>
+     <first_name>Ikey</first_name>
+     <email>ihare2@usda.gov</email>
+  </record>
+  <record>
+     <id>4</id>
+     <first_name>Jobey</first_name>
+     <email>jgarland3@mac.com</email>
+  </record>
+  <record>
+     <id>5</id>
+     <first_name>Nerty</first_name>
+     <email>nbowld4@netvibes.com</email>
+  </record>
+</dataset>

@@ -33,6 +33,7 @@ function checkGender(ssn) {
 			return '여자'}
 	}
 }
+// 뒤에서 7글자 잘라내서 첫번째 값 읽어오는 코드 해보깅
 console.log('성별: ',checkGender('888888-356622'));
 console.log('성별: ',checkGender('888888-456622'));
 console.log('성별: ',checkGender('888888-256622'));
@@ -44,7 +45,3 @@ let fileName = file.match('book');
 let fileExt = file.match('xls');
 console.log('파일명: ', fileName[0]);
 console.log('파일 확장자: ', fileExt[0]);
-//let fileName = file.indexOf('book');
-//let fileExt = file.indexOf('.');
-//console.log('파일명: ', fileName);
-//console.log('파일 확장자: ', fileExt);
