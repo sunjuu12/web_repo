@@ -58,30 +58,15 @@ function loadJson() {
 	console.log(xhtp.responseText);
 	let result = JSON.parse(xhtp.responseText); // json문자열 => 오브젝트(객체)
 	console.log(result);
-	
-	// 실행시키는 것 구현하기요
-	let titles = ["회원번호", "비밀번호", "이름", "연락처"];
-	let dataAry = [];
-	for (let record of result) {
-		let obj = {
-			mid: record.mid,
-			pass: record.pass,
-			name: record.name,
-			phone: record.phone
-		}
-		dataAry.push(obj)
-	}
-	let result1 = table.makeTable(titles, dataAry);
-	console.log(result1);
-	document.getElementById('show').innerHTML = result1;
-	/*
-	let tr = {
-		mid: newMember.mid,
-		pass: newMember.pass,
-		name: newMember.name,
-		phone: newMember.phone
-	}*/
-	document.getElementById('list').innerHTML += newMember;
+
+    let titles = ["회원번호", "비밀번호", "이름", "전화번호"];
+    
+    let tableresult = table.makeTable(titles, json);
+    console.log(tableresult);
+    document.getElementById('show').innerHTML = jsontable;  
+
+    let json = table.makeTr(newMember);
+    document.getElementById('list').innerHTML += json;  
 }
 
 function loadXML() {
