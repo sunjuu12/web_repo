@@ -6,18 +6,19 @@
 </head>
 <body>
 	<table >
-		<tr>
-			<th>아이디</th>
-		
-			<th>비밀번호</th>
-		
-			<th>이름</th>
-		
-			<th>연락처</th>
-		
+		<thead>
+			<tr>
+				<th>아이디</th>
+				<th>비밀번호</th>
+				<th>이름</th>
+				<th>연락처</th>
+			</tr>
 			<td colspan="2">
-			<button id="delBtn">삭제</button
-		</tr>
+				<button id = "delBtn" onclick="delete">삭제</button>
+			</td>
+		</thead>
+		<tbody id = "list">
+		</tbody>
 	</table>
 	<div id="show"></div>
 	<script type="module" src = "booklist1.js"></script>

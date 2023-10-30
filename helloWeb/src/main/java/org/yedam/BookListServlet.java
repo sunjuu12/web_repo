@@ -43,11 +43,11 @@ public class BookListServlet extends HttpServlet {
 		String str = "[";
 		for(BookVO vo : list) {
 			str += "{";
-			str += vo.getBookCode() + "\",";
-			str += vo.getBookTitle() + "\",";
-			str += vo.getBookAuthor() + "\",";
-			str += vo.getBookPress() + "\",";
-			str += vo.getBookPrice() + "\",";
+			str += "<book_code>" + vo.getBookCode() + "</book_code>";
+			str += "<book_title>" + vo.getBookTitle() + "</book_title>";
+			str += "<book_author>" + vo.getBookAuthor() + "</book_author>";
+			str += "<book_press>" + vo.getBookPress() + "</book_press>";
+			str += "<book_price>" + vo.getBookPrice() + "</book_press>";
 			str += "}";
 		}
 		str += "]";
@@ -55,7 +55,7 @@ public class BookListServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

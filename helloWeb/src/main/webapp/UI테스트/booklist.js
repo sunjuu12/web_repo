@@ -1,6 +1,5 @@
 // booklist.js
 
-
 const table = {
 	
 	makeHead(titles = ['도서코드', '도서명', '저자', '출판사', '가격', '삭제']) {
