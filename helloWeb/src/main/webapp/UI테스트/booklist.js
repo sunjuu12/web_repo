@@ -1,17 +1,18 @@
-// ajaxModule.js
+// booklist.js
+
 
 const table = {
 	
-	makeHead(titles = ['회원 아이디', '비밀번호', '이름', '연락처']) {
+	makeHead(titles = ['도서코드', '도서명', '저자', '출판사', '가격', '삭제']) {
 		let headTag = "<thead><tr>";
 		titles.forEach(title => {
-			headTag += "<th>" + title + "</th>";
+			headTag += title;
 		})
 		headTag += "</tr></thead>";
 		return headTag;
 	},
 	
-	makeBody(dataAry = [{mid, pass, name, phone}]) { // [{}] => 형식대로 배열 안은 객체로 오는게 좋음
+	makeBody(dataAry = [{bookCode, bookTitle, bookAuthor, bookPress, bookPrice}]) { // [{}] => 형식대로 배열 안은 객체로 오는게 좋음
 		let bodyTag = "<tbody id='list'>";
 		dataAry.forEach(item => {
 			bodyTag += this.makeTr(item);
@@ -27,12 +28,14 @@ const table = {
 		return tableTag;
 	},
 	
-	makeTr(member = {}) { //객체 
+	makeTr(book = {}) { //객체 
 		let trTag = `<tr onclick='showInfo(event, this)'>`;
-		for (let prop in member) {
-			trTag += `<td>` + member[prop] + `</td>`;
+		for (let prop in book) {
+			trTag +=  book[prop] ;
 		}
+		trTag += '<button onclick="this.parentElement.parentElement.remove()">삭제</button>';
 		trTag += `</tr>`;
+		
 		return trTag;
 	}
 }

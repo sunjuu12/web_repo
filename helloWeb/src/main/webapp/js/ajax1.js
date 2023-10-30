@@ -47,7 +47,7 @@ console.log(friends);
 let newMember = {mid: "M009", pass: "9999", name: "민식이", phone: "010-9999-9999"};
 
 // 1) ajax 실행
-let xhtp = new XMLHttpRequest(); // 객체
+let xhtp = new XMLHttpRequest(); // 객체, 데이터를 가지고 옴
 // open이라는 메소드는 서버상에 있는 페이지를 요청하는 기능 , 요청방식은 'get'과 'post'가 있음
 xhtp.open('get', '../MemberListServ2');
 xhtp.send();
@@ -60,13 +60,16 @@ function loadJson() {
 	console.log(result);
 
     let titles = ["회원번호", "비밀번호", "이름", "전화번호"];
+    let dataAry = [];
     
-    let tableresult = table.makeTable(titles, json);
-    console.log(tableresult);
-    document.getElementById('show').innerHTML = jsontable;  
+    result.forEach(member => {
+		dataAry.push({mid: member.mid, pass: member.pass, name: member.name, phone: member.phone})
+	})
+    result = table.makeTable(titles, dataAry);
+    document.getElementById('show').innerHTML = result;  
 
-    let json = table.makeTr(newMember);
-    document.getElementById('list').innerHTML += json;  
+    //let json = table.makeHead(newMember, dataAry);
+    //document.getElementById('list').innerHTML += json;  
 }
 
 function loadXML() {
@@ -100,3 +103,4 @@ function loadXML() {
 		`</td><td>` + newMember.phone + `</td></tr>`;
 	document.getElementById('list').innerHTML += tr;
 } // end onload
+
