@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>js/fetch.html</title>
+	<script type="module" src = "fetch1.js"></script>
+</head>
+
+<body>
+	<div id="show"></div>
+	<script> // 241p
+		//Promise 객체 (정상적 실행 : fullfilled, 처리중 : pending, 처리 거부 : rejected)
+		const promise = new Promise(function (resolve) {
+			setTimeout(function () {
+				console.log('실행');
+				resolve('Success');
+			}, 500); //매개값 : (실행할 함수, 몇 초 있다가 하겠다)
+		});
+		
+		promise // 정상적으로 실행됐을 경우에 promise 객체는 순차적으로 됨 => 비동기 객체를 동기화 시키고 싶을 때
+			// then에 'Success' 넣어줌
+			.then((resolve) => {
+				console.log('then: ', resolve);
+				// then은 또 다른 promise 객체를 반환할 수 있음
+				return 'OK';
+			})
+			.then((result) => {
+				console.log('2then: ', result);
+				return message;
+			})
+			.catch((err) => { // 실패했을 때
+				console.log('error: ', err);
+			}) 
+	</script>
+</body>
+
+</html>

@@ -17,9 +17,28 @@
 		<li>감자</li>
 	</ul>
 	<p>깃 추가 작업을 함.</p>
-	<p>c의 상태로 변경.</p>
 	<p>a의 상태로 변경.</p>
 	<p>b의 상태로 변경.</p>
+	<script>
+		let body = document.querySelector('body');
+		// console.log(body.children[4].children[2].innerHTML = '멜론');
+		// console.log(body.parentElement.innerHTML = "");
+		// console.log(document.querySelector('ul'));
+		// document.querySelector('ul').innerHTML = `<p>Test</p>';
+		
+		// li의 다섯번째 포도
+		// createElement : element 만드는 메소드
+		let li5 = document.createElement('li');
+		li5.innerHTML = '포도';
+		console.log(li5);
+		document.querySelector('ul').appendChild(li5); // querySelector로 ul을 찾아 appendChild 자식요소를 붙이겠다
+		
+		// 어떤 요소의 뒤에 넣겠다 => after 사용
+		let p4 = document.createElement('p');
+		p4.setAttribute('class', 'fourth'); // p4에 속성을 주고 싶을 때 attribute : 태그 안에 속성 주기
+		p4.innerHTML = 'c의 상태변경';
+		document.querySelector('p:nth-of-type(3)').after(p4);
+	</script>
 </body>
 
 </html>
