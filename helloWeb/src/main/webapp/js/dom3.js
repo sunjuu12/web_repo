@@ -84,18 +84,21 @@ function genTable(rawData = [], page = 1) { // 테이블을 그려주는 코드
 	*/
 	//----------------------------------------
 	// reduce 사용
-	let ReduceData = rawData.reduce((a, b, c, d) => {
-		b = {
+	let mapData = rawdata.reduce((acc, center) => {
+		let newCenter = {
 			id: center.id,
 			centerName: center.centerName.replace('코로나19', ''),
 			org: center.org,
 			phoneNumber: center.phoneNumber,
+			lat : center.lat,
+			lng : center.lng,
 			lat: center.lat,
 			lng: center.lng
-		}
-		a.push(b);
-		return a + b;
-	}, []);
+		}  //새로운 객체 생성 
+
+		acc.push(newCenter);  //생성한 객체를 acc[]에 집어넣기 
+		return acc;
+  },[]);
 	console.log(ReduceData);
 	//-----------------------------------------
 	// tbody 생성
