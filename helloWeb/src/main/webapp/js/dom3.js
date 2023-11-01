@@ -77,6 +77,22 @@ function genTable(rawData = [], page = 1) { // 테이블을 그려주는 코드
 	let endPage = Math.ceil(page / 5) * 5; // 1페이지부터, 10페이지까지 보여주게 해줌 / 현재 페이지기준 마지막 페이지
 	let beginPage = endPage - 4;
 	
+	/* 
+	let beginPage = page-2
+	let endPage = page+2;
+	let prevPage, nextPage = false;
+	
+	if(page-2 < 1){
+		beginPage = 1;
+		endPage = 5;
+	}	
+	if(page+2 > lastPage){
+		endPage = lastPage;
+		beginPage = lastPage-5
+	}
+	 */
+	
+	
 	// 이전 페이지, 다음 페이지가 있는지
 	let prevPage = false;
 	let nextPage = false; 
