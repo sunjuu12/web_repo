@@ -2,8 +2,9 @@
 // table>(thaed>tr>th*5)+(tbody>tr>td*5) * 건수
 import table from './domTable.js'; // export 할 때 default 값을 이용하면 {} 사용하면 안 됨. 
 
+// url은 공공데이터에서 가저온 데이터임 
 let url = 'https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&serviceKey=mMMKYpDAGv1QrPKWMkJYxa3CZ2yv8gXEIDQEGYDABp50c%2FjJ7Hi%2FfXQamGnK11agVujMSZbElT0zdxNi1m5h1g%3D%3D';
-let titles = ['센터id', '센터명', '의료원', '연락처', '위도', '경도'];
+let titles = ['센터id', '센터명', '시도', '연락처', '주소'];
 
 fetch(url) // 순차적으로 실행하는 코드
 	// function(resolve) {return resolve.json()}
@@ -54,10 +55,10 @@ function fetchCallback(result) { // result = resolve.json()
 		genTable(filterAry);
 	}
 
-		// 이벤트와 상관없음
-	let filterAry = rawData.filter((center, idx) => idx < 10);
-	genTable(filterAry);
-	//genTable(rawData); // 초기데이터로 화면 출력
+	// 이벤트와 상관없음
+	genTable(rawData); // 초기데이터로 화면 출력
+	//let filterAry = rawData.filter((center, idx) => idx < 10);
+	//genTable(filterAry);
 		
 } // end fetchCallback
 
@@ -65,6 +66,67 @@ function genTable(rawData = [], page = 1) { // 테이블을 그려주는 코드
 	// 초기화
 	// documemt.getElementById("show").innerHTML = '';
 	document.querySelector('#show').innerHTML = '';
+	document.querySelector('.pagination').innerHTML = '';
+	// 첫번째, 마지막 => 계산
+	let startNo = (page-1) * 5; // 1, 11, 21, ...
+	let endNo = page * 5; // 10, 20, 30 ...
+	
+	// 첫번째, 마지막 페이지 => 계산
+	let totalCnt = rawData.length;
+	let lastPage = Math.ceil(totalCnt / 5); // ceil은 올림을 해줌 / 실제 마지막 페이지
+	let endPage = Math.ceil(page / 5) * 5; // 1페이지부터, 10페이지까지 보여주게 해줌 / 현재 페이지기준 마지막 페이지
+	let beginPage = endPage - 4;
+	
+	// 이전 페이지, 다음 페이지가 있는지
+	let prevPage = false;
+	let nextPage = false; 
+	if ( beginPage > 1 ) {
+		prevPage = true;
+	}
+	if ( endPage < lastPage) {
+		nextPage = true;
+	}
+	if (endPage > lastPage) {
+		endPage = lastPage;
+	}
+	// 이전 페이지 여부
+	if (prevPage) {
+		let aTag = document.createElement('a');
+		aTag.setAttribute('href', '#');
+		aTag.innerHTML = '&laquo';
+		aTag.addEventListener('click', function(e) {
+			genTable(rawData, beginPage - 1); // 클릭할 때 다음 페이지로 넘어감, i는 페이지 수임
+		})
+		document.querySelector('.pagination').append(aTag);
+	}
+	// 전체 페이지
+	for (let i = beginPage; i <= endPage; i++) {
+		let aTag = document.createElement('a');
+		aTag.setAttribute('href', '#');
+		aTag.innerHTML = i;
+		// 해당 페이지 클릭시 색 변경
+		if (i == page) {
+			aTag.setAttribute('class', 'active');
+			//
+		}
+		
+		aTag.addEventListener('click', function(e) {
+			genTable(rawData, i); // 클릭할 때 다음 페이지로 넘어감, i는 페이지 수임
+			
+		})
+		document.querySelector('.pagination').append(aTag);
+	}
+	// 다음 페이지
+	if (nextPage) {
+		let aTag = document.createElement('a');
+		aTag.setAttribute('href', '#');
+		aTag.innerHTML = '&raquo';
+		aTag.addEventListener('click', function(e) {
+			genTable(rawData, endPage + 1); // 클릭할 때 다음 페이지로 넘어감, i는 페이지 수임
+		})
+		document.querySelector('.pagination').append(aTag);
+	}
+	
 	// 전체 rawData로 출력
 	// thead 생성
 	let thead = table.makeHead(titles); // 헤더 정보
@@ -84,25 +146,25 @@ function genTable(rawData = [], page = 1) { // 테이블을 그려주는 코드
 	*/
 	//----------------------------------------
 	// reduce 사용
-	let mapData = rawdata.reduce((acc, center) => {
+	let mapData = rawData.reduce((acc, center, idx) => {
+		if(idx >= startNo && idx < endNo) {
+			
 		let newCenter = {
 			id: center.id,
 			centerName: center.centerName.replace('코로나19', ''),
-			org: center.org,
+			org: center.sido,
 			phoneNumber: center.phoneNumber,
-			lat : center.lat,
-			lng : center.lng,
 			lat: center.lat,
-			lng: center.lng
-		}  //새로운 객체 생성 
-
-		acc.push(newCenter);  //생성한 객체를 acc[]에 집어넣기 
+			lng: center.lng,
+			address: center.address
+		} 
+		acc.push(newCenter); 
+		}
 		return acc;
   },[]);
-	console.log(ReduceData);
 	//-----------------------------------------
 	// tbody 생성
-	let tbody = table.makeBody(ReduceData); // [{}, {}, {} ... {}]
+	let tbody = table.makeBody(mapData); // [{}, {}, {} ... {}]
 
 	// table 생성
 	let tbl = document.createElement('table');
@@ -115,8 +177,8 @@ function genTable(rawData = [], page = 1) { // 테이블을 그려주는 코드
 	let targetTr = document.querySelectorAll('tbody tr'); // tbody 밑에 있는 tr
 	targetTr.forEach(tr => {
 		tr.addEventListener('click', function(e) {
-			let lat = tr.children[4].innerHTML;
-			let lng = tr.children[5].innerHTML;
+			let lat = tr.dataset.lat;  //tr.children[4].innerHTML;
+			let lng = tr.dataset.lng; //tr.children[5].innerHTML;
 			//location.href = 'daumapi.html?x='+lat+'&y='+lng;
 			// 새 탭에 열도록 하는 것 
 			window.open('daumapi.html?x='+lat+'&y='+lng);

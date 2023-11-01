@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>student/studentInfo.html</title>
+</head>
+<body>
+	<div id="show">
+		<table border="1">
+			<thead>
+				<tr>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>생년월일</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody id="list">
+				
+			</tbody>
+		</table>
+	</div>
+	<script>
+		// 페이지가 로딩되면서 바로 실행
+		fetch('../studentList.do')
+		.then(resolve => resolve.json())
+		.then(result => {
+			console.log(result);
+			let tbody = document.querySelector('#list');
+			result.forEach(student => {
+				tbody.append(makeTr(student));
+			})
+		})
+		.catch(err => console.log('error=> ', err));
+		
+		function makeTr(obj) {
+			let showFields = ['studentId', 'studentName', 'studentBirthday'];
+			let tr = document.createElement('tr');
+		  
+		  	for (let prop of showFields) { // center가 가지고 있는 속성 개수 만큼 루핑
+			  let td = document.createElement('td');
+			  td.innerHTML = obj[prop];
+			  tr.append(td);
+		  }arguments
+		  // 삭제 버튼 (td 안에 넣어서 만들어야 함)
+		  let td = document.createElement('td');
+		  let btn = document.createElement('button');
+		  
+		  btn.setAttribute('data-sid', obj.studentId); // 버튼에 아이디 값 생성
+		  btn.innerHTML = '삭제';
+		  btn.addEventListener('click', function(e) {
+			  // ajax 호출 -> servlet 실행
+			  fetch('../delStudent.do?sid='+obj.studentId)
+			  .then(resolve => resolve.json())
+			  .then(result => {
+				  console.log(result);
+				  if (result.retCode == "OK") {
+					  alert("삭제 성공");
+					  tr.remove();
+				  } else {
+					  alert("삭제 실패");
+				  }
+			  })
+			  .catch(err => console.log('error => ', err))
+			  
+		  }) // end btn 이벤트
+		  td.append(btn);
+		  tr.append(td);
+		  
+		  return tr;
+		}
+	</script>
+</body>
+</html>
