@@ -1,10 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>student/studentInfo.html</title>
+	<meta charset="UTF-8">
+	<title>student/studentInfo.html</title>
+	<link rel="stylesheet" href="../css/myStyle.css">
 </head>
+
 <body>
+	<h3>학생 정보 입력</h3>
+	<table border="1">
+		<tr>
+			<th>학생아이디</th>
+			<td><input type="text" id="id" name="id" value="std1"></td>
+		</tr>
+		<tr>
+			<th>학생이름</th>
+			<td><input type="text" id="name" value="김민수"></td>
+		</tr>
+		<tr>
+			<th>비밀번호</th>
+			<td><input type="text" id="password" value="1234"></td>
+		</tr>
+		<tr>
+			<th>전공</th>
+			<td>
+				<select name="sdept" value="경영학과">
+					<option disabled selected>선택하세요.</option>
+					<option value="경영학과">경영학과</option>
+					<option value="컴퓨터공학과">컴퓨터공학과</option>
+					<option value="서양화과">서양화과</option>
+					<option value="영문학과">영문학과</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>생년월일</th>
+			<td><input type="date" id="bir" value="2000-01-08"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+				<button id="addBtn">등록</button>
+			</td>
+
+		</tr>
+	</table>
+	<br>
 	<div id="show">
 		<table border="1">
 			<thead>
@@ -16,59 +57,30 @@
 				</tr>
 			</thead>
 			<tbody id="list">
-				
 			</tbody>
 		</table>
+		<div id="myModal" class="modal">
+
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="close">&times;</span>
+					<h2>Modal Header</h2>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" name="sid">
+					<p>비밀번호<input type="text" name="pass"></p>
+					<p>이름<input type="text" name="name"></p>
+					<p>생년월일<input type="date" name="birth"></p>
+				</div>
+				<div class="modal-footer">
+					<button id="modBtn">수정</button>
+				</div>
+			</div>
+
+		</div>
 	</div>
-	<script>
-		// 페이지가 로딩되면서 바로 실행
-		fetch('../studentList.do')
-		.then(resolve => resolve.json())
-		.then(result => {
-			console.log(result);
-			let tbody = document.querySelector('#list');
-			result.forEach(student => {
-				tbody.append(makeTr(student));
-			})
-		})
-		.catch(err => console.log('error=> ', err));
-		
-		function makeTr(obj) {
-			let showFields = ['studentId', 'studentName', 'studentBirthday'];
-			let tr = document.createElement('tr');
-		  
-		  	for (let prop of showFields) { // center가 가지고 있는 속성 개수 만큼 루핑
-			  let td = document.createElement('td');
-			  td.innerHTML = obj[prop];
-			  tr.append(td);
-		  }arguments
-		  // 삭제 버튼 (td 안에 넣어서 만들어야 함)
-		  let td = document.createElement('td');
-		  let btn = document.createElement('button');
-		  
-		  btn.setAttribute('data-sid', obj.studentId); // 버튼에 아이디 값 생성
-		  btn.innerHTML = '삭제';
-		  btn.addEventListener('click', function(e) {
-			  // ajax 호출 -> servlet 실행
-			  fetch('../delStudent.do?sid='+obj.studentId)
-			  .then(resolve => resolve.json())
-			  .then(result => {
-				  console.log(result);
-				  if (result.retCode == "OK") {
-					  alert("삭제 성공");
-					  tr.remove();
-				  } else {
-					  alert("삭제 실패");
-				  }
-			  })
-			  .catch(err => console.log('error => ', err))
-			  
-		  }) // end btn 이벤트
-		  td.append(btn);
-		  tr.append(td);
-		  
-		  return tr;
-		}
-	</script>
+	<script src="../js/student.js"></script>
 </body>
+
 </html>

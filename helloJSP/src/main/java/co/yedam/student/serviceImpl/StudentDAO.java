@@ -61,7 +61,7 @@ public class StudentDAO {
 	// 수정: update
 	public int update(StudentVO vo) {
 		String sql = "UPDATE STUDENT SET STUDENT_NAME = ?, STUDENT_PASSWORD = ?, "
-				+ " STUDENT_DEPT = ?, STUDENT_BIRTHDAY = ? WHERE STUDENT_ID = ?";
+				+ " STUDENT_DEPT = nvl(?, student_dept), STUDENT_BIRTHDAY = ? WHERE STUDENT_ID = ?";
 				
 		conn = ds.getConnection();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -125,17 +125,24 @@ public class StudentDAO {
 	// 조회: select
 	public StudentVO select(String sid) {
 		String sql = "SELECT * FROM STUDENT WHERE STUDENT_ID = ?";
+		StudentVO vo = null;
 		conn = ds.getConnection();
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, sid);
-			int r = psmt.executeUpdate();
-			
+			rs = psmt.executeQuery();
+			if (rs.next() ) {
+				vo = new StudentVO();
+				vo.setStudentName(rs.getString("student_name"));
+				vo.setStudentPassword(rs.getString("student_password"));
+				vo.setStudentDept(rs.getString("student_dept"));
+				vo.setStudentBirthday(rs.getDate("student_birthday"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
-		return null;
+		return vo;
 	}
 }

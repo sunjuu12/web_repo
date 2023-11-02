@@ -82,23 +82,7 @@ function genTable(rawData = [], page = 1) { // 테이블을 그려주는 코드
 		endPage = page + 2;
 	}
 	let beginPage = endPage - 4;
-	
-	/* 
-	let beginPage = page-2
-	let endPage = page+2;
-	let prevPage, nextPage = false;
-	
-	if(page-2 < 1){
-		beginPage = 1;
-		endPage = 5;
-	}	
-	if(page+2 > lastPage){
-		endPage = lastPage;
-		beginPage = lastPage-5
-	}
-	 */
-	
-	
+
 	// 이전 페이지, 다음 페이지가 있는지
 	let prevPage = false;
 	let nextPage = false; 
