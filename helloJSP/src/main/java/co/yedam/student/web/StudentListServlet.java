@@ -57,7 +57,7 @@ public class StudentListServlet extends HttpServlet {
 		List<StudentVO> list = svc.listStudent();
 		
 		// 객체 -> json 문자열
-		Gson gson = new GsonBuilder().create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		String json = gson.toJson(list);
 		
 		// 데이터를 주고받을 때 strim 사용 PrintWriter는 출력 스트림.

@@ -74,7 +74,13 @@ function genTable(rawData = [], page = 1) { // 테이블을 그려주는 코드
 	// 첫번째, 마지막 페이지 => 계산
 	let totalCnt = rawData.length;
 	let lastPage = Math.ceil(totalCnt / 5); // ceil은 올림을 해줌 / 실제 마지막 페이지
-	let endPage = Math.ceil(page / 5) * 5; // 1페이지부터, 10페이지까지 보여주게 해줌 / 현재 페이지기준 마지막 페이지
+	// 1페이지부터, 10페이지까지 보여주게 해줌 / 현재 페이지기준 마지막 페이지
+	let endPage;
+	if (page == 1 || page == 2 || page == 3 ) {
+		endPage = Math.ceil(page / 5) * 5; 
+	} else {
+		endPage = page + 2;
+	}
 	let beginPage = endPage - 4;
 	
 	// 이전 페이지, 다음 페이지가 있는지
@@ -96,6 +102,7 @@ function genTable(rawData = [], page = 1) { // 테이블을 그려주는 코드
 		aTag.innerHTML = '&laquo';
 		aTag.addEventListener('click', function(e) {
 			genTable(rawData, beginPage - 1); // 클릭할 때 다음 페이지로 넘어감, i는 페이지 수임
+			
 		})
 		document.querySelector('.pagination').append(aTag);
 	}
@@ -107,12 +114,10 @@ function genTable(rawData = [], page = 1) { // 테이블을 그려주는 코드
 		// 해당 페이지 클릭시 색 변경
 		if (i == page) {
 			aTag.setAttribute('class', 'active');
-			//
 		}
-		
 		aTag.addEventListener('click', function(e) {
 			genTable(rawData, i); // 클릭할 때 다음 페이지로 넘어감, i는 페이지 수임
-			
+			beginPage = i-5;
 		})
 		document.querySelector('.pagination').append(aTag);
 	}
