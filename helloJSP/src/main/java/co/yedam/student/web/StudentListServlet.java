@@ -49,8 +49,8 @@ public class StudentListServlet extends HttpServlet {
 		System.out.println("service call.");
 		
 		// 응답 정보의 컨텐트 타입, 인코딩 처리 지정해주는 method 
-		resp.setCharacterEncoding("utf-8"); // DB에서 데이터를 가져오는데 한글이 있을 경우
-		resp.setContentType("text/json;charset=utf-8"); // html 만들 때
+		resp.setCharacterEncoding("UTF-8"); // DB에서 데이터를 가져오는데 한글이 있을 경우
+		resp.setContentType("text/json;charset=UTF-8"); // html 만들 때
 		
 		// 학생 정보를 json 포맷으로 전송하기 위해 데이터 변환(servlet -> json)
 		StudentService svc = new StudentServiceImpl();
