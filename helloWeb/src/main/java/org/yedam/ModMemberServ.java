@@ -40,7 +40,7 @@ public class ModMemberServ extends HttpServlet {
 		// TODO Auto-generated method stub
 		// 수정 처리하는 서블릿
 		// parameter(mid, pass, name, phone)값 받아와서 DB 업데이트 처리
-		String mid = request.getParameter("mid");
+		String mid = request.getParameter("id");
 		String pass = request.getParameter("pass");
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");

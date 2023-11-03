@@ -37,6 +37,7 @@ public class ModStudentServlet extends HttpServlet {
 		StudentVO vo = new StudentVO();
 		
 		vo.setStudentId(id);
+		System.out.println(id);
 		vo.setStudentName(name);
 		vo.setStudentPassword(pass);
 		try {
@@ -56,10 +57,9 @@ public class ModStudentServlet extends HttpServlet {
 			map.put("vo", vo);
 		}
 		
-		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		String json = gson.toJson(map);
 		resp.getWriter().print(json);
-	
+		System.out.println(json);
  	}
 }

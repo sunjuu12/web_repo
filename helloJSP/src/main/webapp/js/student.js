@@ -61,7 +61,7 @@ function modifyCallback(e) {
 	let name = document.querySelector('.modal-body input[name=name]').value;
 	let bir = document.querySelector('.modal-body input[name=birth]').value;
 	
-	let param = `id=${id}&pass=${pass}&name=${name}&birth=${bir}`;
+	let param = `sid=${id}&pass=${pass}&name=${name}&birth=${bir}`;
 	
 	fetch('../editStudent.do', {
 		method: 'post',
@@ -70,10 +70,10 @@ function modifyCallback(e) {
 	})
 	.then(resolve => resolve.json())
 	.then(result => {
-			 console.log('result studentId:', result.vo);
+			 console.log('result:', result);
 		if ( result.retCode == "OK") {
 			 alert('성공');
-			 let targetTr = document.querySelector('tr[data-sid='+result.vo.studentName+']');
+			 let targetTr = document.querySelector('tr[data-sid='+result.vo.studentId+']');
 			 let newTr = makeTr(result.vo);
 			 let parentElem = document.querySelector('#list');
 			 parentElem.replaceChild(newTr, targetTr); // newTr로 바꾸겠다, 부모 요소에서 자식 요소로 바꿀 때 주로 사용
@@ -93,13 +93,14 @@ function makeTr(obj) {
 	
 	// tr 클릭시 모달창 이벤트 추가
 	tr.addEventListener('dblclick', showModal);
-	tr.setAttribute('data-sid', obj.studentId)
+	tr.setAttribute('data-sid', obj.studentId);
 
 	for (let prop of showFields) { // center가 가지고 있는 속성 개수 만큼 루핑
 		let td = document.createElement('td');
 		td.innerHTML = obj[prop];
 		tr.append(td);
-	} arguments
+	} 
+	
 	// 삭제 버튼 (td 안에 넣어서 만들어야 함)
 	let td = document.createElement('td');
 	let btn = document.createElement('button');
@@ -144,6 +145,7 @@ function showModal(e) {
 			console.log('result: ',result);
 			console.log('result.vo.studentName: ', result.vo.studentName);
 			modal.querySelector("h2").innerHTML = result.vo.studentName;
+			modal.querySelector("input[name=sid]").value = result.vo.studentId;
 			modal.querySelector("input[name=pass]").value = result.vo.studentPassword;
 			modal.querySelector("input[name=name]").value = result.vo.studentName;
 			modal.querySelector("input[name=birth]").value = result.vo.studentBirthday;

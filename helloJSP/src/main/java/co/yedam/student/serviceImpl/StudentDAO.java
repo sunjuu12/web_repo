@@ -100,7 +100,7 @@ public class StudentDAO {
 	// 목록: list
 	public List<StudentVO> listStudent() {
 		 List<StudentVO> list = new ArrayList<StudentVO>();
-		 String sql = "SELECT * FROM STUDENT ";
+		 String sql = "SELECT * FROM STUDENT";
 		 conn = ds.getConnection();
 		 try {
 			psmt = conn.prepareStatement(sql);
@@ -133,6 +133,7 @@ public class StudentDAO {
 			rs = psmt.executeQuery();
 			if (rs.next() ) {
 				vo = new StudentVO();
+				vo.setStudentId(rs.getString("student_id"));
 				vo.setStudentName(rs.getString("student_name"));
 				vo.setStudentPassword(rs.getString("student_password"));
 				vo.setStudentDept(rs.getString("student_dept"));
