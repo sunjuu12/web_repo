@@ -4,6 +4,7 @@ import java.util.List;
 
 import co.yedam.board.service.BoardService;
 import co.yedam.board.service.BoardVO;
+import co.yedam.board.service.MemberVO;
 
 public class BoardServiceImpl implements BoardService{
 	BoardDAO dao = new BoardDAO();
@@ -30,8 +31,19 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int removeBoard(int boardNo) { // 삭제
-		return dao.delete(boardNo);
+	public boolean removeBoard(int boardNo) { // 삭제
+		return dao.delete(boardNo) == 1;
 	}
+
+	@Override
+	public MemberVO loginCheck(String id, String pw) {
+		return dao.getUser(id, pw); // 로그인
+	}
+
+	@Override
+	public List<MemberVO> memberlist() {
+		return dao.memberList();
+	}
+
 	
 }

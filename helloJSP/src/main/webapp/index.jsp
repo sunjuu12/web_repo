@@ -22,7 +22,8 @@
 	<a href="FirstServlet.do">서블릿 링크</a> --%>
 	
 	<% 
-		response.sendRedirect("boardList.do");
+		/* response.sendRedirect("boardList.do"); */
+		response.sendRedirect("main.do");
 	%>
 </body>
 </html>

@@ -8,5 +8,9 @@ public interface BoardService {
 	public BoardVO getBoard(int boardNo);
 	public boolean addBoard(BoardVO vo);
 	public boolean editBoard(BoardVO vo);
-	public int removeBoard(int boardNo);
+	public boolean removeBoard(int boardNo);
+	
+	// 로그인 처리
+	public MemberVO loginCheck(String id, String pw);
+	public List<MemberVO> memberlist();
 }
