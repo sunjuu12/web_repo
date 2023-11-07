@@ -13,14 +13,14 @@
 		<table class="table">
 			<tr>
 				<th>제목</th>
-				<td><input  type="text" name="title" value="<%=vo.getTitle() %>"></td>
+				<td><input class="form-control" type="text" name="title" value="<%=vo.getTitle() %>"></td>
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="writer" value="<%=vo.getWriter() %>"></td>
+				<td><input class="form-control" type="text" name="writer" value="<%=vo.getWriter() %>"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea cols="31" rows="6" <%@include file="../layout/footer.jsp"%> name="content"><%=vo.getContent() %></textarea></td>
+				<td colspan="2"><textarea cols="31" rows="6" class="form-control" name="content"><%=vo.getContent() %></textarea></td>
 			</tr>
 			<tr>
 				<th>파일명</th>
@@ -28,8 +28,8 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="삭제">
-					<input type="reset" value="초기화">
+					<input class="btn btn-primary" type="submit" value="삭제">
+					<input class="btn btn-warning" type="reset" value="초기화">
 				</td>
 			</tr>
 		</table>

@@ -24,7 +24,7 @@ public class MemberListControl implements Command {
 		System.out.println(members);
 		
 		//req.getRequestDispatcher("WEB-INF/board/memberList.jsp"); //.forward(req, reps);
-		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/board/memberList.jsp"); //.forward(req, reps);
+		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/main/memberList.jsp"); //.forward(req, reps);
 		try {
 			rd.forward(req, reps);
 		} catch (Exception e) {

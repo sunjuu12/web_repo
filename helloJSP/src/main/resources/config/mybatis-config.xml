@@ -19,5 +19,6 @@
 		</environments>
 	<mappers>
 		<mapper resource="co/yedam/board/mapper/BoardMapper.xml" />
+		<mapper class="co.yedam.reply.mapper.ReplyMapper" />
 	</mappers>
 </configuration>
