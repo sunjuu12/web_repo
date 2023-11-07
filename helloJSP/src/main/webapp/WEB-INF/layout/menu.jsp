@@ -17,7 +17,7 @@
 <body>
 <%
 	String logId = (String) session.getAttribute("logId"); /* 값이 없으면 null 반환 */
-	String responsbility = (String) session.getAttribute("responsbility");
+	String resposbility = (String) session.getAttribute("resposbility");
 %>
 	<div class="d-flex" id="wrapper">
 		<!-- Sidebar-->
@@ -35,8 +35,7 @@
 					<a class="list-group-item list-group-item-action list-group-item-light p-3" href="logoutForm.do">로그아웃</a>
 				 <% } %>
 			<!-- 관리자 권한일 경우 -->
-			<%=responsbility %>
-			<% if (responsbility != null && responsbility.equals("Admin")) { %>
+			<% if (resposbility != null && resposbility.equals("Admin")) { %>
 				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberList.do">회원관리</a> 
 			<% } %>
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a> 

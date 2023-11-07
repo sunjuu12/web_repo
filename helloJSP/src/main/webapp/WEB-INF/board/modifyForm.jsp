@@ -13,7 +13,7 @@
 		<table class="table">
 			<tr>
 				<th>제목</th>
-				<td><input <%@include file="../layout/footer.jsp"%> type="text" name="title" value="<%=vo.getTitle() %>"></td>
+				<td><input type="text" name="title" value="<%=vo.getTitle() %>"></td>
 			</tr>
 			<tr>
 				<th>작성자</th>

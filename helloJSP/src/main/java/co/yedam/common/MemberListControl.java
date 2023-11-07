@@ -13,13 +13,10 @@ import co.yedam.board.service.MemberVO;
 import co.yedam.board.serviceImpl.BoardServiceImpl;
 
 public class MemberListControl implements Command {
-
+	MemberVO vo = new MemberVO();
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse reps) {
-		String mid = req.getParameter("mid");
-		String pass = req.getParameter("pass");
-		String responsbility = req.getParameter("responsbility");
-		
+			
 		BoardService svc = new BoardServiceImpl();
 		List<MemberVO> members = svc.memberlist();
 		
