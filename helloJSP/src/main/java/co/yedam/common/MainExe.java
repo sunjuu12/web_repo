@@ -47,11 +47,17 @@ public class MainExe {
 			 * }
 			 */
 		 // true가 들어가면 업데이트는 자동 커밋 됨
+		
 		 SqlSession session = DataSourceMybatis.getInstance().openSession(true);
 		 ReplyMapper mapper = session.getMapper(ReplyMapper.class);
 		 
-		 List<ReplyVO> list = mapper.replyList(1);
-		 list.forEach(vo -> System.out.println(vo));
+		 // 댓글 리스트
+		 //List<ReplyVO> list = mapper.replyList(1);
+		 //list.forEach(vo -> System.out.println(vo));
+		
+		 //댓글 페이지
+		 mapper.replyList(2, 2).forEach(rep -> System.out.println(rep));
+		 
 		
 		 
 

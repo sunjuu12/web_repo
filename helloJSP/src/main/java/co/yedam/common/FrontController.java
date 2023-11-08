@@ -18,6 +18,7 @@ import co.yedam.board.web.ModifyBoardControl;
 import co.yedam.board.web.RemoveBoardControl;
 import co.yedam.board.web.RemoveFormControl;
 import co.yedam.reply.web.AddReplyControl;
+import co.yedam.reply.web.RemoveReplyControl;
 import co.yedam.reply.web.ReplyListControl;
 
 // url : *.do
@@ -60,6 +61,7 @@ public class FrontController extends HttpServlet {
 		// 댓글목록
 		map.put("/replyList.do", new ReplyListControl());
 		map.put("/addReply.do", new AddReplyControl());
+		map.put("/removeReply.do", new RemoveReplyControl());
 	}
 	// 요청을 받았을 때 어떤 형식으로 반환할 것인지 지정
 	

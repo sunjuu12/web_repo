@@ -23,7 +23,8 @@
 	
 	<% 
 		/* response.sendRedirect("boardList.do"); */
-		response.sendRedirect("main.do");
+		// response.sendRedirect("main.do");
 	%>
+	<jsp:forward page="main.do"></jsp:forward><!-- 페이지 재지정 -->
 </body>
 </html>

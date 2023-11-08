@@ -14,9 +14,9 @@ public class ReplyServiceImpl implements ReplyService {
 	ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 	
 	@Override
-	public List<ReplyVO> replyList(int boardNo) {
+	public List<ReplyVO> replyList(int boardNo, int page) {
 		// TODO Auto-generated method stub
-		return mapper.replyList(boardNo);
+		return mapper.replyList(boardNo, page);
 	}
 	@Override
 	public ReplyVO selectReply(int replyNo) {
@@ -37,6 +37,11 @@ public class ReplyServiceImpl implements ReplyService {
 	public boolean deleteReply(int replyNo) {
 		// TODO Auto-generated method stub
 		return mapper.deleteReply(replyNo) == 1;
+	}
+	@Override
+	public int getTotalCnt(int boardNo) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalCnt(boardNo);
 	}
 	
 
