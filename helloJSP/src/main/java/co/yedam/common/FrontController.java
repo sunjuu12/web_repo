@@ -62,6 +62,11 @@ public class FrontController extends HttpServlet {
 		map.put("/replyList.do", new ReplyListControl());
 		map.put("/addReply.do", new AddReplyControl());
 		map.put("/removeReply.do", new RemoveReplyControl());
+		
+		// 차트
+		map.put("/chartForm.do", new ChartFormControl());
+		// 실제 데이터 가지고 오는 것
+		map.put("/drawChart.do", new DrawChartControl());
 	}
 	// 요청을 받았을 때 어떤 형식으로 반환할 것인지 지정
 	

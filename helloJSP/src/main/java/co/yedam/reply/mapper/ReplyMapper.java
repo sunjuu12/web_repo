@@ -1,6 +1,7 @@
 package co.yedam.reply.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -15,4 +16,7 @@ public interface ReplyMapper {
 	
 	// 댓글 건수
 	public int getTotalCnt(int boardNo);
+	// 차트 데이터
+	public List<Map<String, Object>> getReplyCountByWriter();
+		
 }

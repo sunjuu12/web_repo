@@ -1,11 +1,11 @@
 package co.yedam.common;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import co.yedam.reply.mapper.ReplyMapper;
-import co.yedam.reply.service.ReplyVO;
 import co.yedam.student.service.StudentService;
 import co.yedam.student.serviceImpl.StudentServiceImpl;
 
@@ -56,7 +56,10 @@ public class MainExe {
 		 //list.forEach(vo -> System.out.println(vo));
 		
 		 //댓글 페이지
-		 mapper.replyList(2, 2).forEach(rep -> System.out.println(rep));
+		 //mapper.replyList(2, 2).forEach(rep -> System.out.println(rep));
+		 
+		 List<Map<String, Object>> map = mapper.getReplyCountByWriter();
+		 System.out.println(map);
 		 
 		
 		 
