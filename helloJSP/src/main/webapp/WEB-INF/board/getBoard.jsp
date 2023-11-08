@@ -26,53 +26,56 @@
 		background-color: #ddd;
 	}
 </style>
-<%@include file="../layout/menu.jsp" %>
-<%@include file="../layout/header.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<jsp:include page="../layout/menu.jsp"></jsp:include>
+<jsp:include page="../layout/header.jsp"></jsp:include>
 
-<%
-	BoardVO vo = (BoardVO) request.getAttribute("bno");
-	%>
 <hr>
 <h3>상세화면(조회화면)</h3>
 <form action="modifyForm.do" name="myFrm">
-	<input type="hidden" name="bno" value="<%=vo.getBoardNo() %>">
+	<input type="hidden" name="bno" value="${bno.boardNo }">
 	<table class="table">
 		<tr>
 			<th>글번호</th>
-			<td class="boardNo"><%=vo.getBoardNo()%></td>
+			<td class="boardNo">${bno.boardNo }</td>
 			<th>작성 일시</th>
-			<td><%=vo.getWriteDate()%></td>
+			<td><fmt:formatDate value="${bno.writeDate }" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
 		</tr>
 		<tr>
 			<th>글제목</th>
-			<td colspan="3"><%=vo.getTitle()%></td>
+			<td colspan="3">${bno.title }</td>
 		</tr>
 		<tr>
 			<td colspan="4">
-				<textarea class="form-control" rows="5" cols="40"><%=vo.getContent()%></textarea></td>
+				<textarea class="form-control" rows="5" cols="40">${bno.content }</textarea></td>
 		</tr>
 		<tr>
 			<th>이미지</th>
 			<td colspan="3">
-				<% if (vo.getImage() != null) { %>
-				<img width="80px" src="images/<%=vo.getImage()%>"></td>
-			<% } %>
+				<c:if test="${!empty bno.image }">
+					<img width="80px" src="images/${bno.image }">
+				</c:if>
+			</td>
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td><%=vo.getWriter()%></td>
+			<td>${bno.writer }</td>
 			<th>조회수</th>
-			<td><%=vo.getViewCnt()%></td>
+			<td>${bno.viewCnt }</td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">
-				<% if (logId != null && logId.equals(vo.getWriter())) { %>
-				<input class="btn btn-primary" type="submit" value="수정">
-				<input class="btn btn-warning" type="button" value="삭제">
-				<% } else { %>
-				<input class="btn btn-primary" disabled type="submit" value="수정">
-				<input class="btn btn-warning" disabled type="button" value="삭제">
-				<% } %>
+				<c:choose>
+					<c:when test="${!empty logId && logId == bno.writer }">
+						<input class="btn btn-primary" type="submit" value="수정">
+						<input class="btn btn-warning" type="button" value="삭제">
+					</c:when>
+					<c:otherwise>
+						<input class="btn btn-primary" disabled type="submit" value="수정">
+						<input class="btn btn-warning" disabled type="button" value="삭제">
+					</c:otherwise>
+				</c:choose>
 			</td>
 		</tr>
 	</table>
@@ -104,8 +107,8 @@
 	});
 
 	// 댓글 목록
-	let bno = "<%=vo.getBoardNo() %>";
-	let writer = "<%=logId %>";
+	let bno = "${bno.boardNo }";
+	let writer = "${logId }";
 	console.log(bno);
 	bno = document.querySelector(".boardNo").innerHTML;
 	let page = 1;
@@ -240,4 +243,4 @@
 	}
 </script>
 
-<%@include file="../layout/footer.jsp" %>
+<jsp:include page="../layout/footer.jsp"></jsp:include>

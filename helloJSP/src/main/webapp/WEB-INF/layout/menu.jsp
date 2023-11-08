@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="utf-8">
 <head>
@@ -15,29 +16,33 @@
 <link href="css/styles.css" rel="stylesheet" />
 </head>
 <body>
-<%
-	String logId = (String) session.getAttribute("logId"); /* 값이 없으면 null 반환 */
-	String resposbility = (String) session.getAttribute("resposbility");
-%>
+
 	<div class="d-flex" id="wrapper">
 		<!-- Sidebar-->
 		<div class="border-end bg-white" id="sidebar-wrapper">
-			<% if (logId == null) { %>
+		<div class="list-group list-group-flush">
+		<c:choose>
+			<c:when test="${empty logId }">
 				<div class="sidebar-heading border-bottom bg-light">(Guest)입니다.</div>
-			<% } else { %>
-				<div class="sidebar-heading border-bottom bg-light">(<%=logId %>)님 환영합니다!</div>
-			<% } %>
-			<div class="list-group list-group-flush">
-			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">게시글 목록</a> 
-				<% if (logId == null) { %>
-					<a class="list-group-item list-group-item-action list-group-item-light p-3" href="loginForm.do">로그인</a>
-				<% } else { %>
-					<a class="list-group-item list-group-item-action list-group-item-light p-3" href="logoutForm.do">로그아웃</a>
-				 <% } %>
+			</c:when>
+			<c:otherwise>
+				<div class="sidebar-heading border-bottom bg-light">(${logId })님 환영합니다! ${resposbility}</div>
+			</c:otherwise>
+		</c:choose>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">게시물 목록</a>			
+		<c:choose>
+			<c:when test="${empty logId }">
+					<a class="list-group-item list-group-item-action list-group-item-light p-3" href="loginForm.do">로그인</a>			
+			</c:when>
+			<c:otherwise>
+					<a class="list-group-item list-group-item-action list-group-item-light p-3" href="logoutForm.do">로그아웃</a>			
+			</c:otherwise>
+		</c:choose>
+		
 			<!-- 관리자 권한일 경우 -->
-			<% if (resposbility != null && resposbility.equals("Admin")) { %>
+			<c:if test="${!empty resposbility && resposbility == 'Admin' }">
 				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberList.do">회원관리</a> 
-			<% } %>
+			</c:if>
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a> 
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a> 
 			<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>

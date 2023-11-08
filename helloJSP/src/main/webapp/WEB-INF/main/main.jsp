@@ -10,5 +10,5 @@
 	<p class="m-0 text-center">첫 페이지입니다.</p>
 </div>
 
-	<jsp:include page="../layout/footer.jsp"></jsp:include>
+<jsp:include page="../layout/footer.jsp"></jsp:include>
 <%-- <%@include file="../layout/footer.jsp"%> --%>
