@@ -10,19 +10,18 @@
 	google.charts.setOnLoadCallback(drawChart);
 	
 	function drawChart() {
-		fetch('drawChart.do')
+		fetch('drawChart.do') // 데이터를 가지고 오겠다는 의미
 		.then(resolve => resolve.json())
 		.then(result => {
-			console.log(result);
+			console.log(result); // {}
 			let dataAry = [['Writer', 'Cnt']];
 			result.forEach(item => {
-				dataAry.push([item.REPLYER, item.CNT])
+				dataAry.push([item.replyer, item.cnt]) // [['writer', 'cnt'], ['m001', 12]...]
 				var data = google.visualization.arrayToDataTable(dataAry);
 				var options = {
 						title : '작성자 건수별',
 						is3D : true,
 					};
-
 					var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
 					chart.draw(data, options);
 			})
