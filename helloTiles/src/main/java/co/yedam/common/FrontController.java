@@ -26,9 +26,7 @@ public class FrontController extends HttpServlet {
 		
 		// 상세 화명
 		//map.put("/FirstServlet.do", new FirstControl()); // map.put(a, b) a 요청이 들어오면 b 기능을 실행하겠다
-		//map.put("/second.do", new SecondControl());
-		map.put("/boardList.do", new BoardListControl());
-		
+		//map.put("/second.do", new SecondControl());		
 		map.put("/memberList.do", new MemberListControl());
 		
 		map.put("/boardList.do", new BoardListControl());
