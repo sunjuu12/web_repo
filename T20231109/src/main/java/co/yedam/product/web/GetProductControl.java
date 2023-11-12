@@ -1,5 +1,7 @@
 package co.yedam.product.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,15 +14,25 @@ public class GetProductControl implements Command {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse reps) {
-		String pcode = req.getParameter("pcode");
+		String path = "product/productInfo.tiles";
+		
+		String pid = req.getParameter("pid");
+		
 		ProductService svc = new ProductServiceImpl();
+		ProductVO vo = svc.getProduct(pid);
 		
-		ProductVO vo = svc.getProduct(Integer.parseInt(pcode));
+		System.out.println(vo);
 		
-		req.setAttribute("pcode", vo);
+		req.setAttribute("vo", vo);
+
+		List<ProductVO> list = svc.productlist();
+
+		System.out.println(list);
+
+		req.setAttribute("list", list);
 		
 		try {
-			req.getRequestDispatcher("WEB-INF/product/productInfo.jsp").forward(req, reps);
+			req.getRequestDispatcher(path).forward(req, reps);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

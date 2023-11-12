@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -16,16 +17,19 @@
         <link href="resources/boot-shop/css/styles.css" rel="stylesheet" />
     </head>
     <body>
-        <!-- Navigation-->
+    
+        <!-- Header-->
         <tiles:insertAttribute name="header"></tiles:insertAttribute>
-        <!-- Header--> 
-                    <!-- 상품목록 -->
-                    <tiles:insertAttribute name="body"></tiles:insertAttribute>
-                <!-- 상품목록 -->
-                </div>
-            </div>
-        </section>
+        <!-- Section-->
+       	<tiles:insertAttribute name="body"></tiles:insertAttribute>
         <!-- Footer-->
-       <tiles:insertAttribute name="footer"></tiles:insertAttribute>
+        <tiles:insertAttribute name="footer"></tiles:insertAttribute>
+        
     </body>
+    
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="resources/boot-shop/js/scripts.js"></script>
+        
 </html>

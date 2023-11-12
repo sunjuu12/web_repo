@@ -16,12 +16,17 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public List<ProductVO> productList() {
-		return mapper.productList();
+		return mapper.selectList();
 	}
-
 	@Override
-	public ProductVO getProduct(int prodCode) {
+	public ProductVO getProduct(String prodCode) {
 		return mapper.select(prodCode);
 	}
+	@Override
+	public List<ProductVO> productlist() {
+		return mapper.productlist();
+	}
+	
+	
 
 }
